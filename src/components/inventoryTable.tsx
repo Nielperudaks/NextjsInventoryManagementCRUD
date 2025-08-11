@@ -61,8 +61,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import ImageUpload from "./imageUpload";
-import { url } from "inspector";
+import ImageUpload from "./ImageUpload";
+
 
 
 
@@ -301,10 +301,13 @@ export default function InventoryTable({ items }: InventoryTableProps) {
     const [itemToDelete, setItemToDelete] = useState<any>(null);
 
     const handleAddChange = (field: string, value: string | number) => {
-        setAddFormData({ ...addFormData, [field]: value });
-        // Clear error when user starts typing
+        setAddFormData(prev => {
+            const updated = { ...prev, [field]: value };
+            console.log("Updated addFormData:", updated);
+            return updated;
+        });
         if (addError) setAddError("");
-    }
+    };
 
     const handleAddSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -602,14 +605,17 @@ export default function InventoryTable({ items }: InventoryTableProps) {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="grid gap-3">
+
+                                <div className="grid gap-3 mb-3">
                                     <Label htmlFor="category">Upload your Image</Label>
-                                    <ImageUpload endpoint="postImage" value={addFormData.imgUrl} onChange={(url) => {
-                                        handleAddChange("imgUrl", url);
-                                    }}
+
+                                    <ImageUpload
+                                        endpoint="postImage"
+                                        value={addFormData.imgUrl}
+                                        onChange={(url) => handleAddChange("imgUrl", url)}
                                     />
                                 </div>
-                                
+
                                 {addError && <p className="text-red-500 text-sm">{addError}</p>}
                             </div>
                             <DialogFooter>
@@ -760,7 +766,17 @@ export default function InventoryTable({ items }: InventoryTableProps) {
                                         <Label htmlFor="edit-price" className="pb-3">Price</Label>
                                         <Input id="edit-price" type="number" value={editFormData.price} onChange={(e) => handleEditChange("price", e.target.value)} placeholder="0.00" />
                                     </div>
+
                                 </div>
+                            </div>
+                            <div className="grid gap-3 mb-3">
+                                <Label htmlFor="category">Upload your Image</Label>
+
+                                <ImageUpload
+                                    endpoint="postImage"
+                                    value={editFormData.imgUrl}
+                                    onChange={(url) => handleAddChange("imgUrl", url)}
+                                />
                             </div>
                             {editError && <p className="text-red-500 text-sm">{editError}</p>}
                         </div>

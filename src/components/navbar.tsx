@@ -26,7 +26,7 @@ async function navbar() {
 
 
                     {/* Navigation */}
-                    <div className='hidden md:flex items-center space-x-4'>
+                    <div className=' md:flex items-center space-x-2'>
                         <ModeToggle />
                         <Button variant='ghost' asChild>
                             <Link href='/Items'>
@@ -58,8 +58,8 @@ async function navbar() {
                                 </Link>
                             </Button>
                         </>)}
-
                         <UserButton />
+
 
 
                     </div>

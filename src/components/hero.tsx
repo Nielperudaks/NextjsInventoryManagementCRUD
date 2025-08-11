@@ -3,6 +3,7 @@ import { ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { Button, buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
 
 const Hero12 = () => {
   return (
@@ -26,22 +27,27 @@ const Hero12 = () => {
             </div>
             <div>
               <h1 className="mb-6 text-2xl font-bold tracking-tight text-pretty lg:text-5xl">
-                Build your next project with{" "}
-                <span className="text-primary">Blocks</span>
+                Store your precious items{" "}
+                <span className="text-primary">Securely</span>
               </h1>
               <p className="mx-auto max-w-3xl text-muted-foreground lg:text-xl">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Elig
-                doloremque mollitia fugiat omnis! Porro facilis quo animi
-                consequatur. Explicabo.
+                A lightweight and user-friendly application designed to help track, manage, and organize products in stock.
               </p>
             </div>
             <div className="mt-6 flex justify-center gap-3">
+
               <Button className="shadow-sm transition-shadow hover:shadow">
-                Get Started
+                <Link href="/src/app/Items/">
+                  Store now
+                </Link>
+
+
               </Button>
+
               <Button variant="outline" className="group">
-                Learn more{" "}
-                <ExternalLink className="ml-2 h-4 transition-transform group-hover:translate-x-0.5" />
+                <Link href="https://github.com/Nielperudaks/NextjsInventoryManagementCRUD">
+                  Git hub{" "}   
+                </Link>
               </Button>
             </div>
             <div className="mt-20 flex flex-col items-center gap-5">

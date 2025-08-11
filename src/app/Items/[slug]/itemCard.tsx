@@ -71,9 +71,6 @@ export default function ItemCard({ item }: ItemCardProps) {
           </div>
 
           <div className="flex gap-4 mt-8">
-            <Button size="lg" className="flex-1">
-              Edit
-            </Button>
             <Button size="lg" variant="outline" className="flex-1" onClick={handleBack}>
               Back
             </Button>

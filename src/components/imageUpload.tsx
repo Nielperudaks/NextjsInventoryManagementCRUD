@@ -9,11 +9,12 @@ interface ImageUploadProps{
     onChange: (url: string) => void;
 }
 
-function imageUpload({endpoint, onChange, value}: ImageUploadProps) {
+function ImageUpload({endpoint, onChange, value}: ImageUploadProps) {
+    console.log(value)
     if(value){
         return(
             <div className="relative size-40">
-                <img src="{value}" alt="Upload image" className='rounded-md w-full object-cover'/>
+                <img src={value} alt="Upload image" className='rounded-md w-full object-cover'/>
                 <button onClick={()=> onChange("")} className='absolute top-0 right-0 p-1 bg-red-500 rounded-full shadow-sm' type='button'>
                     <XIcon className='h-4 w-4 text-white'/>
                 </button>
@@ -23,13 +24,14 @@ function imageUpload({endpoint, onChange, value}: ImageUploadProps) {
     }
 
     return (
-        <div className="w-full">
+        <div className="w-full h-full">
             <UploadDropzone<OurFileRouter, "postImage">
-                endpoint={endpoint}
+                endpoint="postImage"
                 onClientUploadComplete={(res) => {
                     // Do something with the response
                     console.log("Files: ", res);
                     alert("Upload Completed");
+                    console.log("Upload complete raw response:", res); 
                     if(res && res[0]?.ufsUrl ){
                         onChange(res[0].ufsUrl);
                     }
@@ -41,14 +43,13 @@ function imageUpload({endpoint, onChange, value}: ImageUploadProps) {
                     // Do something once upload begins
                     console.log("Uploading: ", name);
                 }}
-                onDrop={(acceptedFiles) => {
-                    // Do something with the accepted files
-                    console.log("Accepted files: ", acceptedFiles);
-                }}
-            />
+
+                onDrop={(files) => console.log("Dropped files:", files)}
+                
+            />  
 
         </div>
     )
 }
 
-export default imageUpload
+export default ImageUpload
